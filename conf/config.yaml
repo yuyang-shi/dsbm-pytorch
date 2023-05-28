@@ -1,0 +1,48 @@
+# @package _global_
+
+defaults:
+  - _self_
+  # - launcher: slurm_gpu
+  - job
+  - model: UNET
+  - method: dbdsb  #dsb, dbdsb
+  - dataset: mnist_transfer
+  # - override hydra/launcher: submitit_slurm
+
+name: ${Dataset}_${data.dataset}
+run: 0
+seed: 42
+use_default_wandb_name: False
+wandb_id: null # leave as null for wandb to assign this
+
+# logging
+LOGGER: Wandb  # CSV
+CSV_log_dir: ./
+
+# training
+optimizer: Adam
+test_batch_size: 1000
+plot_level: 2
+cache_refresh_stride: ${num_iter}
+cache_num_steps: ${num_steps}
+test_num_steps: ${num_steps}
+normalize_x1: False
+
+paths: 
+  experiments_dir_name: experiments
+  data_dir_name: data
+
+# checkpoint
+autostart_next_it: False
+
+checkpoint_run: False
+checkpoint_it: 1
+checkpoint_pass: b  # b or f (skip b ipf run)
+checkpoint_iter: 0
+checkpoint_dir: null
+sample_checkpoint_f: null
+sample_checkpoint_b: ${checkpoint_dir}/
+checkpoint_f: null
+checkpoint_b: ${checkpoint_dir}/
+optimizer_checkpoint_f: null
+optimizer_checkpoint_b: ${checkpoint_dir}/

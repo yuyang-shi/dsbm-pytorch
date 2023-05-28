@@ -1,0 +1,17 @@
+# @package _global_
+
+Method: DSB
+
+mean_match: False
+
+# schedule
+gamma_max: 0.2
+gamma_min: 0.001
+gamma_space: linspace
+
+symmetric_gamma: True
+
+var_final_gamma_scale: False
+langevin_scale: 2*torch.sqrt(gamma)
+loss_scale: 1.
+

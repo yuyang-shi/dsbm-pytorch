@@ -1,0 +1,17 @@
+# @package _global_
+
+Model: DownscalerUNET
+model: 
+    num_channels: 32
+    channel_mult: 
+        - 1
+        - 2
+        - 4
+        - 8
+    num_res_blocks: 8
+    dropout: 0.5
+    temb_scale: 30
+    mean_bypass: True
+    scale_mean_bypass: True
+    shift_input: True
+    shift_output: True

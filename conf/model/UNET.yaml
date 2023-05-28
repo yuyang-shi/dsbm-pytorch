@@ -1,0 +1,14 @@
+# @package _global_
+
+Model: UNET
+model: 
+    num_channels: 128
+    channel_mult: null
+    num_res_blocks: 2
+    num_heads: 4
+    attention_resolutions: "16,8"
+    dropout: 0.1  # 0.0  # 
+    use_checkpoint: False
+    use_scale_shift_norm: True
+    resblock_updown: False
+    temb_scale: 1000

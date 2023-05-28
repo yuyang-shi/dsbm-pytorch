@@ -1,0 +1,22 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - job
+
+name: gaussian
+seed: null
+a: 0.1
+dim: 5
+sigma: 1
+num_steps: 20
+net_name: mlp_large
+activation_fn: torch.nn.SiLU
+model_name: dsb
+first_coupling: ref
+inner_iters: 10000
+outer_iters: 40
+fb_sequence: ['b','f']
+
+paths: 
+  experiments_dir_name: experiments

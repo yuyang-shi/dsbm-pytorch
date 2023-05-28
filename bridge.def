@@ -1,0 +1,40 @@
+################# Header: Define the base system you want to use ################
+# Reference of the kind of base you want to use (e.g., docker, debootstrap, shub).
+Bootstrap: docker
+# Select the docker image you want to use 
+From: nvidia/cuda:11.7.0-cudnn8-devel-ubuntu18.04
+
+################# Section: Defining the system ################################# 
+# Commands in the %post section are executed within the container.
+%post
+    # Linux packages
+    apt -y update && \
+    apt install -y \
+    wget \
+    git \
+    unzip && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
+
+    # Install conda
+    wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3 && \
+    rm Miniconda3-latest-Linux-x86_64.sh
+    . /opt/miniconda3/etc/profile.d/conda.sh
+
+    # Install packages
+    conda create --name bridge python=3.9
+    conda activate bridge
+
+    conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+    conda install -c conda-forge cudatoolkit-dev
+    
+    conda install scipy pandas scikit-learn tqdm matplotlib seaborn python-lmdb h5py
+    conda install -c conda-forge pytorch-lightning hydra-core wandb gdown p7zip pot ninja
+    conda install -c conda-forge accelerate
+    conda install -c conda-forge torch-fidelity lpips torchdiffeq
+    conda install -c conda-forge jupyterlab
+    pip install slurm-gpustat hydra-submitit-launcher
+
+    echo ". /opt/miniconda3/etc/profile.d/conda.sh" >> $SINGULARITY_ENVIRONMENT
+    echo "conda activate /opt/miniconda3/envs/bridge" >> $SINGULARITY_ENVIRONMENT

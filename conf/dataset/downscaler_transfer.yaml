@@ -1,0 +1,53 @@
+# @package _global_
+
+cdsb: True
+
+# data 
+Dataset: downscaler_high
+data:
+  dataset: "downscaler_transfer"
+  image_size: 512
+  channels: 2
+  cond_channels: 1
+  random_flip: False
+  wavenumber: 0
+  split: train
+
+# transfer
+transfer: True
+Dataset_transfer: downscaler_low
+
+
+final_adaptive: False
+adaptive_mean: False
+mean_final: torch.zeros([${data.channels}, ${data.image_size}, ${data.image_size}])
+var_final: 1 * torch.ones([${data.channels}, ${data.image_size}, ${data.image_size}])
+
+# device
+device: cuda
+num_workers: 2
+pin_memory: True
+
+# logging
+log_stride: 100
+gif_stride: 10000
+plot_npar: 16
+test_npar: 16
+test_batch_size: 8
+cache_npar: 1250
+cache_batch_size: 10
+num_repeat_data: 1
+cache_refresh_stride: 2500
+
+# training
+use_prev_net: True
+ema: True
+ema_rate: 0.999
+grad_clipping: True
+grad_clip: 1.0
+batch_size: 4
+num_iter: 10000
+n_ipf: 30
+lr: 0.0002
+
+num_steps: 100

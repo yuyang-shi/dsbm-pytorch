@@ -1,0 +1,19 @@
+# @package _global_
+
+Method: DBDSB
+
+first_num_iter: ${num_iter}
+
+# schedule
+sde: ve
+gamma_max: 0.2
+gamma_min: 0.001
+gamma_space: linspace
+
+symmetric_gamma: False
+
+first_coupling: ref
+
+mean_match: False
+loss_scale: True
+std_trick: False

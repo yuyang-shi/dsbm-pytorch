@@ -1,0 +1,21 @@
+# @package _global_
+
+Method: RF
+
+first_num_iter: 500000
+
+# schedule
+sde: ve
+gamma_max: 0.01
+gamma_min: 0.01
+gamma_space: linspace
+
+symmetric_gamma: True
+
+first_coupling: ind
+ot_sampler: null
+
+# Not used by needed for __init__ in the IPF_DBDSB parent class
+mean_match: False
+loss_scale: False
+std_trick: False
