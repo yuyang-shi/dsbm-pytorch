@@ -114,6 +114,8 @@ def DBDSB_CacheLoader(sample_direction, sample_fn, init_dl, final_dl, num_batche
 
             try:
                 batch_x0, batch_x1 = torch.load(os.path.join(temp_cache_dir, f"{b_dist}.pt"))
+                if ipf.cdsb:
+                    batch_y = torch.load(os.path.join(temp_cache_dir, f"{b_dist}_y.pt"))[0]
                 assert len(batch_x0) == len(batch_x1) == cache_batch_size_dist
                 batch_x0, batch_x1 = batch_x0.to(ipf.device), batch_x1.to(ipf.device)
             except:
